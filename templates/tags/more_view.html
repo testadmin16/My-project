@@ -1,0 +1,10 @@
+{% for post in more_view %}
+<div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px; border-radius: 5%; padding: 20px;">
+    <p>
+
+        <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+        👁{{ post.see }} | ⏳ {{ post.created_at | date:"d-m-Y f" }}
+    </p>
+</div>
+
+{% endfor %}

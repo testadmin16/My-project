@@ -1,0 +1,14 @@
+<div class="btn-group" role="group" aria-label="Basic outlined example" style="text-align: center;">
+
+    {% if page.has_previous %}
+        <button type="button" class="btn btn-outline-primary"><a style="color:black;" href="?page={{page.previous_page_number}}">Ortga</a></button>
+    {% endif %}
+
+    <button type="button" class="btn btn-outline-primary">{{ page.number }}</button>
+    
+    {% if page.has_next %}
+        <button type="button" class="btn btn-outline-primary" ><a style="color:black;" href="?page={{ page.next_page_number }}">Keyingisi</a></button>
+    {% endif %}
+
+</div>
+

@@ -1,0 +1,11 @@
+{% for post in lastest_posts %}
+
+<div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px; border-radius: 5%; padding: 20px;">
+    <p>
+        <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+        <p>{{ post.created_at | date:"d-m-Y f" }}</p>
+    </p>
+</div>
+{% endfor %}
+
+

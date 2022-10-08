@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+
+{% block content %} 
+
+    <section class="contact-form-wrap section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-title text-center">
+                        {% if sent %}
+                            <h2 class="text-md mb-2">Xabar muvaffaqiyatli jo'natildi</h2>
+                            <div class="divider mx-auto my-4"></div>
+                            <p class="mb-5">{{ post.title }}</p>
+                            <p>maqolasi {{form.cleaned_data.to }} ga yuborildi.</p>
+                            <br><br>
+                            <button><a href="{% url 'post:post_list' %}">Ortga</a></button>
+                        {% else %}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h1 style="text-align: center;">{{ post.title }} maqolasini ulashish</h1>
+                        <form  style="text-align: center;"   method="post">
+                            {{ form.as_p }}<!-- as_ul and as_table -->
+                             {% csrf_token  %} <!-- hafsizlikka javobgar -->
+                            <br>
+                            <input type="submit" value="Yuborish">
+                        </form>
+                        <button><a href="{% url 'post:post_list' %}">Ortga</a></button>
+                        {% endif %}
+                </div>
+      
+            </div>
+        </div>
+    </section>
+    
+{% endblock content %}
+
+

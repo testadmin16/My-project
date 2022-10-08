@@ -1,0 +1,116 @@
+{% extends 'base.html' %} 
+{% load blog_tags %}
+{% load crispy_forms_tags %}
+
+
+{% load static %}
+ 
+
+
+{% block content %}
+
+<section class="section blog-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+					<div class="col-lg-12 mb-5">
+						<div class="single-blog-item">
+							<h2 class="mb-4 text-md">{{ post.title }}</h2>
+							<img src="{{ post.photo.url }}" alt="" class="img-fluid">
+
+							<div class="blog-item-content mt-5">
+								<div class="blog-item-meta mb-3">
+									<span class="text-black text-capitalize mr-3"><i class="fa-solid fa-user"></i>{{ post.created_by }}</span>
+									<span class="text-black text-capitalize mr-3"><i class="icofont-calendar mr-2"></i>{{ post.created_at|date:" d.m.Y | f" }}</span>
+									<span class="text-muted text-capitalize mr-3"><i class="icofont-comment mr-2"></i>{{ comments.count }}</span>
+								</div> 
+
+								
+
+								<div class="lead mb-4" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px; border-radius: 1px; padding: 20px;">{{ post.body| safe }}</div>
+
+								<button class="btn btn-main-2 btn-round-full"><a style="color: white;" href="{% url 'post:post_share' post.id %}">Maqolani ulashish</a></button>
+
+							</div>
+						</div>
+					</div>
+					<!-- Commentlar  -->
+					<div class="col-lg-12">
+						<div class="comment-area mt-4 mb-5">
+							<div>
+								{% with comments.count as total_comments %}
+									{% if total_comments == 0 %}
+										<h4 class="mb-4">Hali izohlar mavjud emas</h4>
+									{% else %}
+										<h4 class="mb-4">{{ total_comments }} ta izoh mavjud</h4>
+									{% endif %}
+								{% endwith %}
+							</div>
+							<ul class="comment-tree list-unstyled">
+								<li>
+									<div class="comment-area-box">
+
+										{% for comment in comments %}
+										<div class="comment-info">
+											<h5 class="mb-1">{{ comment.name }} | {{ comment.email }}</h5>
+											<span class="date-comm">{{ comment.created_at|date:" d-F Y | f" }}</span>
+										</div>
+
+										<div class="comment-content mt-3">
+											<p>{{ comment.body | safe }}</p>
+										</div>
+										{% endfor %}
+
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div>{% if new_comment %}
+						
+							<h2>Sizning izohingiz qo'shildi</h2>
+						{% else %}
+							<h2>Izoh qoldirish</h2>
+							<form action="." method="post">
+								{{ comment_form.media }}
+								{{ comment_form | crispy }}
+								{%  csrf_token %}
+								<br>
+								<p><input  type="submit" value="Qo'shish"></p>
+							</form>
+						{% endif %}
+
+						<br>
+
+						<a href="{% url 'post:post_list' %}"><button class="btn btn-main-2 btn-round-full">Ortga</button></a>
+
+					</div>
+				</div>
+            </div>
+            <!-- eng kop postlar -->
+            <div class="col-lg-4">
+                <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
+					<div class="sidebar-widget latest-post mb-3">
+						<h5>Eng so'nngi yangiliklar</h5>
+						
+						{% show_lastest_posts %}
+						
+
+					</div>
+
+					<div class="sidebar-widget latest-post mb-3">
+						<h5>Eng ko'p ko'rilgan yangiliklar</h5>
+						{% show_more_view %}
+				    </div>
+				</div>
+			</div>
+            </div>   
+        </div>
+    </div>
+</section>
+
+	
+{% endblock content %}
+
