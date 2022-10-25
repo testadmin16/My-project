@@ -11,10 +11,14 @@
 
 <section class="section blog-wrap">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="row">
-					<div class="col-lg-12 mb-5">
+        <div class="row" style="flex-wrap: nowrap;">
+			<div class="sidebar-widget latest-post mb-3">
+				<h5>Eng ko'p ko'rilgan yangiliklar</h5>
+				{% show_more_view %}
+			</div>
+			<div class="col-lg-8">
+		        <div class="row">
+				<div class="col-lg-12 mb-5">
 						<div class="single-blog-item">
 							<h2 class="mb-4 text-md">{{ post.title }}</h2>
 							<img src="{{ post.photo.url }}" alt="" class="img-fluid">
@@ -94,20 +98,14 @@
                 <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
 					<div class="sidebar-widget latest-post mb-3">
 						<h5>Eng so'nngi yangiliklar</h5>
-						
 						{% show_lastest_posts %}
 						
-
-					</div>
-
-					<div class="sidebar-widget latest-post mb-3">
-						<h5>Eng ko'p ko'rilgan yangiliklar</h5>
-						{% show_more_view %}
-				    </div>
+			</div>
+				
 				</div>
 			</div>
-            </div>   
-        </div>
+		  </div>   
+		</div>
     </div>
 </section>
 
